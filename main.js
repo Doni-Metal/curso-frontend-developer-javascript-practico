@@ -1,44 +1,3 @@
-const navEmail = document.querySelector(".navbar-email");
-const desktopMenu = document.querySelector(".desktop-menu");
-
-const menuHamIcon = document.querySelector(".menuHamIcon");
-const mobileMenu = document.querySelector(".mobile-menu");
-
-const shoppingCart = document.querySelector(".navbar-shopping-cart");
-const menuCarrito = document.querySelector(".product-detail");
-
-navEmail.addEventListener("click", toggleDM);
-menuHamIcon.addEventListener("click", toggleMM);
-shoppingCart.addEventListener("click", toggleCart);
-
-function toggleDM() {
-  if (menuCarrito.classList.contains("inactive")) {
-    desktopMenu.classList.toggle("inactive");
-  } else {
-    menuCarrito.classList.add("inactive");
-    desktopMenu.classList.toggle("inactive");
-  }
-}
-
-function toggleMM() {
-  if (menuCarrito.classList.contains("inactive")) {
-    mobileMenu.classList.toggle("inactive");
-  } else {
-    menuCarrito.classList.add("inactive");
-    mobileMenu.classList.toggle("inactive");
-  }
-}
-
-function toggleCart() {
-  if (desktopMenu.classList.contains("inactive") && mobileMenu.classList.contains("inactive")) {
-    menuCarrito.classList.toggle("inactive");
-  } else {
-    mobileMenu.classList.add("inactive");
-    desktopMenu.classList.add("inactive");
-    menuCarrito.classList.toggle("inactive");
-  }
-}
-
 const productList = [];
 productList.push({
   name: 'Bike',
@@ -86,9 +45,10 @@ productList.push({
   image: "https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 })
 
-const cardsContainer = document.querySelector('.cards-container')
 
 for (product of productList) {
+  const cardsContainer = document.querySelector('.cards-container')
+
   const productCard = document.createElement('div');
   productCard.classList.add('product-card')
 
@@ -114,4 +74,64 @@ for (product of productList) {
   productInfo.append(productInfoDiv, productInfoFigure);
   productInfoDiv.append(productPrice, productName);
   productInfoFigure.appendChild(cartImg);
+
+}
+
+const navEmail = document.querySelector(".navbar-email");
+const desktopMenu = document.querySelector(".desktop-menu");
+
+const menuHamIcon = document.querySelector(".menuHamIcon");
+const mobileMenu = document.querySelector(".mobile-menu");
+
+const shoppingCart = document.querySelector(".navbar-shopping-cart");
+const menuCarrito = document.querySelector(".order-detail");
+
+const itemCard = document.querySelector('.product-card')
+const productScreen = document.querySelector('.product-detail')
+
+navEmail.addEventListener("click", toggleDM);
+menuHamIcon.addEventListener("click", toggleMM);
+shoppingCart.addEventListener("click", toggleCart);
+itemCard.addEventListener("click", toggleInfoScreen);
+
+function toggleDM() {
+  if (menuCarrito.classList.contains("inactive") && productScreen.classList.contains("inactive")) {
+    desktopMenu.classList.toggle("inactive");
+  } else {
+    menuCarrito.classList.add("inactive");
+    productScreen.classList.add("inactive");
+    desktopMenu.classList.toggle("inactive");
+  }
+}
+
+function toggleMM() {
+  if (menuCarrito.classList.contains("inactive") && productScreen.classList.contains("inactive")) {
+    mobileMenu.classList.toggle("inactive");
+  } else {
+    menuCarrito.classList.add("inactive");
+    productScreen.classList.add("inactive");
+    mobileMenu.classList.toggle("inactive");
+  }
+}
+
+function toggleCart() {
+  if (desktopMenu.classList.contains("inactive") && mobileMenu.classList.contains("inactive") && productScreen.classList.contains("inactive")) {
+    menuCarrito.classList.toggle("inactive");
+  } else {
+    mobileMenu.classList.add("inactive");
+    desktopMenu.classList.add("inactive");
+    productScreen.classList.add("inactive");
+    menuCarrito.classList.toggle("inactive");
+  }
+}
+
+function toggleInfoScreen() {
+  if (desktopMenu.classList.contains("inactive") && mobileMenu.classList.contains("inactive") && menuCarrito.classList.contains("inactive")) {
+    productScreen.classList.toggle("inactive");
+  } else {
+    mobileMenu.classList.add("inactive");
+    desktopMenu.classList.add("inactive");
+    menuCarrito.classList.add("inactive");
+    productScreen.classList.toggle("inactive");
+  }
 }
