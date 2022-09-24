@@ -1,45 +1,9 @@
-const productList = [];
-productList.push({
-  name: 'Bike',
-  price: 120.00,
-  image: "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  description: "Bicicleta para montaña"
-})
-productList.push({
-  name: 'Screen',
-  price: 350.00,
-  image: "https://images.pexels.com/photos/7948010/pexels-photo-7948010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  description: "Excelent TV Screen"
-})
-productList.push({
-  name: 'Computer',
-  price: 1500.00,
-  image: "https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  description: "The MAC that everyone wants"
-})
-productList.push({
-  name: 'Bike',
-  price: 120.00,
-  image: "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  description: "Bicicleta para montaña"
-})
-productList.push({
-  name: 'Screen',
-  price: 350.00,
-  image: "https://images.pexels.com/photos/7948010/pexels-photo-7948010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  description: "Excelent TV Screen"
-})
-productList.push({
-  name: 'Computer',
-  price: 1500.00,
-  image: "https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  description: "The MAC that everyone wants"
-})
+import { productList } from "./products.js";
 
-for (product in productList) {
-  let name = productList[product].name;
+for (let product in productList) {
+  let title = productList[product].title;
   let price = productList[product].price;
-  let image = productList[product].image;
+  let image = productList[product].images[0];
 
   const cardsContainer = document.querySelector('.cards-container')
 
@@ -59,7 +23,7 @@ for (product in productList) {
   const productPrice = document.createElement('p')
   productPrice.innerText = "$" + price;  
   const productName = document.createElement('p')
-  productName.innerText = name;
+  productName.innerText = title;
   
   const productInfoFigure = document.createElement('figure');
   const cartImg = document.createElement('img');
@@ -80,10 +44,12 @@ const mobileMenu = document.querySelector(".mobile-menu");
 
 const shoppingCart = document.querySelector(".navbar-shopping-cart");
 const menuCarrito = document.querySelector(".order-detail");
+const orderBackArrow= document.querySelector(".order-back-arrow");
 
 const productScreen = document.querySelector('.product-detail')
 const closeProduct = document.querySelector(".product-detail-close");
 
+orderBackArrow.addEventListener("click", closeInfoScreen);
 navEmail.addEventListener("click", toggleDM);
 menuHamIcon.addEventListener("click", toggleMM);
 shoppingCart.addEventListener("click", toggleCart);
@@ -128,8 +94,8 @@ function openInfoScreen() {
   let itemPrice = document.querySelector(".itemPrice");
   let itemDescription = document.querySelector(".itemDescription");
 
-  itemImage.setAttribute("src", productList[id].image);
-  itemName.innerText = productList[id].name;
+  itemImage.setAttribute("src", productList[id].images[0]);
+  itemName.innerText = productList[id].title;
   itemPrice.innerText = "$" + productList[id].price;
   itemDescription.innerText = productList[id].description;
 
@@ -145,4 +111,5 @@ function openInfoScreen() {
 
 function closeInfoScreen() {
   productScreen.classList.add("inactive");
+  menuCarrito.classList.add("inactive")
 }
